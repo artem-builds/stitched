@@ -47,7 +47,14 @@ class Product(models.Model):
     updatedAt = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        if not self.slug:
+            base = slugify(self.name)
+            slug = base
+            n = 1
+            while Product.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                n += 1
+                slug = f"{base}-{n}"
+            self.slug = slug
         super().save(*args, **kwargs)
         
     def __str__(self):

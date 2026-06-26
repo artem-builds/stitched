@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'cart.middleware.CartMiddleware',
 ]
 
 ROOT_URLCONF = 'stitched.urls'
@@ -71,7 +73,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 
                 'cart.context_processors.cart_processor',
-                'cart.middleware.CartMiddleware',
+                
             ],
         },
     },
